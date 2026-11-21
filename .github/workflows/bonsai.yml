@@ -1,7 +1,7 @@
 name: Bonsai
 on:
   schedule:
-    - cron: "0 3 * * *" # Runs at 3 AM UTC
+    - cron: "0 3 * * *"
   workflow_dispatch:
   push:
     paths: [.github/workflows/bonsai.yml]
@@ -15,10 +15,11 @@ jobs:
   grow:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Updated to v5 for better Node 24 compatibility
+      - uses: actions/checkout@v5 
       - uses: egorthinks/git-bonsai@bec04c39f62731fdb28c3b82322ef21cbf3bdfac
         with:
-          commit: 'false' # We handle the commit manually to check for changes
+          commit: 'false'
       - name: Commit the bonsai if it changed
         shell: bash
         run: |
